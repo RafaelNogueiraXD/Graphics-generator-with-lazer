@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grafico de Elipse 3D com Plotly.js</title>
+    <!-- Plotly.js através da CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Material UI -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- fonte Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+
+    <style>
+      body {
+        background: white;
+        color: rgb(0, 0, 0); /* Cor do titulo */
+        display: flex; /* Corrigido para usar o layout flexível */
+        justify-content: space-around; /* Adicionado para dar espaço ao redor dos elementos */
+      }
+      /* Estilo para alinhar o cabeçalho */
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      /* Estilos para o formulario */
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      label {
+        font-size: 1.2rem;
+      }
+      input[type="number"] {
+        font-size: 1.2rem;
+        color: rgb(0, 0, 0); /* Cor do texto do input em preto */
+      }
+      button[type="submit"] {
+        margin-top: 20px;
+        background-color: #2196f3;
+        color: white;
+        font-size: 1.2rem;
+      }
+      /* Estilo para o grafico */
+      #myDiv {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .form-container {
+        order: 1;
+        width: 60%;
+      }
+
+      .graph-container {
+        order: 2;
+        width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <header>
+          <h2>Grafico de Elipse 3D com Plotly.js</h2>
+        </header>
+        <form id="formElipse">
+          <div class="input-field">
+            <input type="number" id="xCentro" value="2" />
+            <label for="xCentro">Centro X:</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="yCentro" value="3" />
+            <label for="yCentro">Centro Y:</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="a" value="4" />
+            <label for="a">Eixo Maior:</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="b" value="2" />
+            <label for="b">Eixo Menor:</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="angulo" value="45" />
+            <label for="angulo">Angulo (graus):</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="qtdElipsesX" value="1" />
+            <label for="qtdElipsesX">Quantidade de Elipses no Eixo X:</label>
+          </div>
+          <div class="input-field">
+            <input type="number" id="qtdElipsesY" value="1" />
+            <label for="qtdElipsesY">Quantidade de Elipses no Eixo Y:</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit">
+            Gerar Grafico<i class="material-icons right">send</i>
+          </button>
+        </form>
+      </div>
+
+      <div id="myDiv" class="graph-container"></div>
+    </div>
+
+    <script>
+      function calcularPontosElipse(xCentro, yCentro, a, b, angulo, nPontos) {
+        const pontos = [];
+        for (let i = 0; i < nPontos; i++) {
+          const theta = (i / nPontos) * 2 * Math.PI;
+          const x =
+            xCentro +
+            a * Math.cos(theta) * Math.cos(angulo) -
+            b * Math.sin(theta) * Math.sin(angulo);
+          const y =
+            yCentro +
+            a * Math.cos(theta) * Math.sin(angulo) +
+            b * Math.sin(theta) * Math.cos(angulo);
+          const z = 0; // Define o valor do eixo Z para 0 (pode ajustar conforme necessario)
+          pontos.push({ x, y, z });
+        }
+        return pontos;
+      }
+
+      document
+        .getElementById("formElipse")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const xCentro = parseFloat(document.getElementById("xCentro").value);
+          const yCentro = parseFloat(document.getElementById("yCentro").value);
+          const a = parseFloat(document.getElementById("a").value);
+          const b = parseFloat(document.getElementById("b").value);
+          const angulo =
+            (parseFloat(document.getElementById("angulo").value) * Math.PI) /
+            180;
+          const qtdElipsesX = parseInt(
+            document.getElementById("qtdElipsesX").value
+          );
+          const qtdElipsesY = parseInt(
+            document.getElementById("qtdElipsesY").value
+          );
+          const nPontos = 100;
+
+          const data = [];
+
+          for (let i = 0; i < qtdElipsesX; i++) {
+            for (let j = 0; j < qtdElipsesY; j++) {
+              const pontosElipse = calcularPontosElipse(
+                xCentro + i * a * 2,
+                yCentro + j * a * 2,
+                a,
+                b,
+                angulo,
+                nPontos
+              );
+              data.push({
+                x: pontosElipse.map((p) => p.x),
+                y: pontosElipse.map((p) => p.y),
+                z: pontosElipse.map((p) => p.z),
+                mode: "markers",
+                type: "scatter3d",
+              });
+            }
+          }
+
+          Plotly.newPlot("myDiv", data);
+        });
+    </script>
+  </body>
+</html>
