@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Dinâmico com Flask</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Formulário e Gráfico Dinâmico</h1>
+    
+    <!-- Formulário que envia os dados -->
+    <form id="form" action="/submit" method="POST">
+        <label for="value">Insira um valor:</label>
+        <input type="number" id="value" name="value" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Área para exibir o gráfico -->
+    <div style="width: 75%; margin-top: 50px;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Script para criar o gráfico -->
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let myChart;
+
+        function updateChart(data) {
+            if (myChart) {
+                myChart.destroy();  // Se já existe, destrói o gráfico anterior
+            }
+            myChart = new Chart(ctx, {
+                type: 'line',  // Tipo do gráfico
+                data: {
+                    labels: ['A', 'B', 'C', 'D', 'E'],  // Exemplo de labels
+                    datasets: [{
+                        label: 'Dados calculados',
+                        data: data,  // Dados calculados pelo backend
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Escutar o envio do formulário
+        document.getElementById('form').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevenir o comportamento padrão do envio
+            const value = document.getElementById('value').value;
+
+            // Fazer a requisição POST
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ value: value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Atualizar o gráfico com os dados recebidos do backend
+                updateChart(data.calculated_values);
+            });
+        });
+    </script>
+</body>
+</html>
