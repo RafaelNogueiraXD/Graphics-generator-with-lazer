@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem de Fundo com Sobreposição</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('../static/img/bg-index.png'); /* Substitua 'sua-imagem.jpg' pelo caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor e transparência da sobreposição */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* h1 {
+    font-size: 3rem;
+}
+
+p {
+    font-size: 1.5rem;
+} */
+
+</style>
+<body>
+    <div class="overlay">
+            <section class="titulo-site">
+                <h1>Gerador de Grafico Lazer</h1>
+            </section>
+    
+            <section class="opcoes">
+                <div class="template-caixa duas-dimensoes centraliza">
+                    <h2>2 Dimensões</h2>
+                    <a href="garay.html" class="botao">começar</a>
+                </div>
+                <div class="template-caixa centraliza">
+                    <h2>3 Dimensões </h2>
+                    <a href="garay.html" class="botao">começar</a>
+                </div>
+                <div class="template-caixa centraliza">
+                    <div class="centraliza">
+                        <div class="caixa-elipse">
+                            <h2>Graficos Elipses</h2>
+                            <a href="garay.html" class="botao">começar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </div>
+</body>
+</html>

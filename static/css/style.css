@@ -1,23 +1,109 @@
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
+@import url("components/_index.scss");
+body {
+  color: #FF6600;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
+html, body {
+  height: 100%;
+}
+
+.index-body {
   background-color: black;
-  color: #fff;
+  color: #FF6600;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg-index.png") no-repeat center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: 2;
+}
+
+.index-link {
+  text-align: right;
+  color: #FF6600;
+}
+
+.conteudo-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.titulo-site {
+  color: #FF6600;
+  background-color: rgba(40, 40, 40, 0.2784313725);
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
+  padding: 20px;
+  border-radius: 10PX;
+  margin: 10px auto;
+  font-size: 25px;
+  /* border: 2px solid #FF6600;; */
 }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+.centraliza {
+  text-align: center;
+  align-items: center;
 }
+
+.opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.template-caixa {
+  background-color: rgba(55, 55, 55, 0.368627451);
+  margin: 15px;
+  padding: 10%;
+  padding-top: 60px;
+  border-radius: 20px;
+  transition: all 400ms ease-in;
+  align-items: center;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.template-caixa h2 {
+  margin: 10px;
+}
+
+.template-caixa:hover {
+  background: rgba(55, 55, 55, 0.368627451);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  /* padding: 20px; */
+  border-color: #FF6600;
+  border: 2px solid #FF6600;
+  box-shadow: 0 20px 12px rgba(224, 89, 11, 0.3);
+  transition: box-shadow 300ms ease, -webkit-backdrop-filter 300ms ease;
+  transition: backdrop-filter 300ms ease, box-shadow 300ms ease;
+  transition: backdrop-filter 300ms ease, box-shadow 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+
+.plus {
+  text-align: right;
+}
+
+.botao {
+  display: inline-block;
+  color: #FF6600;
+  padding: 10%;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: background-color 0.5s ease, transform 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #FF6600;
+  margin: 10px;
+}
+
+.botao:hover {
+  background-color: #FF6600;
+  transform: scale(1.05);
+  color: white;
+}/*# sourceMappingURL=style.css.map */

@@ -12,6 +12,13 @@ def home():
 def gerar_duas():
     return render_template('2d.html')
 
+@app.route('/teste')
+def teste_bg():
+    return render_template('teste.html')
+
+
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     data = request.get_json()  
