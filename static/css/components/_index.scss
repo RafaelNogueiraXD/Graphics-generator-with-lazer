@@ -1,14 +1,5 @@
 .index-body{
-    background-color: black;
-    color: #FF6600;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('../img/bg-index.png') no-repeat center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    
-    position: relative;
-    z-index: 2; 
+    @include define-bg('../img/index-bg.png', 0.5); 
     }
 
 

@@ -25,7 +25,7 @@ y_vals = np.linspace(-10, 10, 400)  # Valores de y
 X, Y = np.meshgrid(x_vals, y_vals)  # Criando a grade
 
 # Calculando para o ângulo beta de 45°
-Z = calculate_interference(lambda_, 45, X, Y)
+Z = calculate_interference(lambda_, 45, X, Y) + calculate_interference(lambda_, 90, X, Y)
 
 # Criando a figura para gráfico 3D
 fig = plt.figure(figsize=(10, 7))

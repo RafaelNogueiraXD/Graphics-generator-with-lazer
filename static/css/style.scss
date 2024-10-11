@@ -1,13 +1,22 @@
 $primaria: #FF6600;
+$primaria_bg: #ff660057;
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     color: $primaria;
 }
 html, body{
     height: 100%;
 }
-
-
-@import url("components/_index.scss");
-// @include 
+@import "components/functions";
 @import "components/index";
+@import "components/2d";
+
+
+.teste-body{
+        @include define-bg('../img/index-bg.png', 0.5); 
+}
