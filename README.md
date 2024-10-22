@@ -1,4 +1,4 @@
-<h2>Welcome to the Lazers Project! 😊</h2>
+<h2>Welcome to the Two Beam interference pattern Project! 😊</h2>
 <p>
 This is a project built with Flask, aimed at generating graphs based on equations formed by two lasers. These lasers, pointed at the same point, project a specific object.
 </p>
