@@ -29,7 +29,14 @@ fig, axes = plt.subplots(2, 2, figsize=(10, 8))
 
 for i, beta in enumerate(betas):
     ax = axes[i//2, i%2]
-    Z = calculate_interference(lambda_, beta, X, Y)
+    if beta == 45:
+        Z = calculate_interference(lambda_, beta, X, Y) + calculate_interference(lambda_, 135, X, Y)
+    elif beta == 0:
+        Z = calculate_interference(lambda_, beta, X, Y) + calculate_interference(lambda_, 90, X, Y)
+    else: 
+        Z = calculate_interference(lambda_, beta, X, Y)
+        
+        
     
     # Gerando o gráfico de contorno da interferência
     contour = ax.contourf(X, Y, Z, levels=100, cmap='viridis')
